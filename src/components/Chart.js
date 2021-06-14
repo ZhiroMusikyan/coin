@@ -9,7 +9,7 @@ import {
     Legend
 } from "recharts";
 import {makeStyles} from "@material-ui/core";
-import getData from "./query/GetData";
+import getData from "../query/GetData";
 
 const useStyle = makeStyles(() => ({
     container: {

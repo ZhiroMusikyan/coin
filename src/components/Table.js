@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import React, {useEffect, useState} from 'react';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import getData from "./query/GetData";
+import getData from "../query/GetData";
 
 
 function descendingComparator(a, b, orderBy) {
