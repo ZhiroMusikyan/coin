@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import React, {useEffect, useState} from 'react';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
+import getData from "./query/GetData";
 
 
 function descendingComparator(a, b, orderBy) {
@@ -150,14 +151,15 @@ const EnhancedTable = ({handleClick}) => {
     const [rows, setRows] = useState([]);
 
 
-    async function fetchData() {
-        let result = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd");
-        result = await result.json();
-        setRows(result);
-    }
+    // async function fetchData() {
+    //     let result = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd");
+    //     result = await result.json();
+    //     setRows(result);
+    // }
 
     useEffect(async () => {
-        await fetchData();
+        const coinsList = await getData("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd")
+        setRows(coinsList);
     }, []);
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';

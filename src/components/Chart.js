@@ -9,6 +9,7 @@ import {
     Legend
 } from "recharts";
 import {makeStyles} from "@material-ui/core";
+import getData from "./query/GetData";
 
 const useStyle = makeStyles(() => ({
     container: {
@@ -21,11 +22,6 @@ const Chart = ({coinId, coinName, days}) => {
     const classes = useStyle();
     const [data, setData] = useState();
 
-    const fetchData = async (url) => {
-        let result = await fetch(url);
-        result = await result.json();
-        return result;
-    };
     const creatData = (arr) => {
         setData(arr.map((i) => {
             return {date: new Date(i[0]).toLocaleDateString(), [coinName]: i[1]}
@@ -33,7 +29,7 @@ const Chart = ({coinId, coinName, days}) => {
     };
 
     useEffect(async () => {
-        let historyData = await fetchData(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}&interval=daily`);
+        let historyData = await getData(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}&interval=daily`);
         creatData(historyData?.prices)
     }, [coinId, days]);
     return (
